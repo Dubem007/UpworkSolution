@@ -1,0 +1,40 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/Users/{everything}",
+      "DownstreamScheme": "https",
+      "SwaggerKey": "userservice",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5199"
+        }
+      ],
+      "UpstreamPathTemplate": "/Identity/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Profile/{everything}",
+      "DownstreamScheme": "https",
+      "SwaggerKey": "userservice",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5199"
+        }
+      ],
+      "UpstreamPathTemplate": "/profile/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    }
+  ]
+}

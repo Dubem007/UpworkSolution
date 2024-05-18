@@ -1,0 +1,14 @@
+{
+  "QueueSettings": {
+    "AppName": "Upwork",
+    "AppKey": "CommonLib",
+    "Encryption": {
+      "Key": "1234567890"
+    },
+    "QueueConfig": {
+      "QueueName": "http://localhost:5104/Account/",
+      "QueueConstring": "amqp://guest:guest@localhost:5672/"
+    }
+    
+  }
+}

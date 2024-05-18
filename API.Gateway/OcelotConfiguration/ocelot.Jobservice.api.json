@@ -1,0 +1,40 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/Job/{everything}",
+      "DownstreamScheme": "https",
+      "SwaggerKey": "jobservice",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7109"
+        }
+      ],
+      "UpstreamPathTemplate": "/jobs/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Talent/{everything}",
+      "DownstreamScheme": "https",
+      "SwaggerKey": "jobservice",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7109"
+        }
+      ],
+      "UpstreamPathTemplate": "/talents/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    }
+  ]
+}

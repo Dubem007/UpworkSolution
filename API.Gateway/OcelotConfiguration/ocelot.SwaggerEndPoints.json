@@ -1,0 +1,48 @@
+{
+  "SwaggerEndPoints": [
+    {
+      "Key": "api-gateway",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        {
+          "Name": "Api-Gateway",
+          "Version": "1.0",
+          "Url": "https://localhost:7182/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "identityserver",
+      "TransformByOcelotConfig": true,
+      "Config": [
+        {
+          "Name": "Identity-server",
+          "Version": "1.0",
+          "Url": "https://localhost:5013"
+        }
+      ]
+    },
+    {
+      "Key": "userservice",
+      "TransformByOcelotConfig": true,
+      "Config": [
+        {
+          "Name": "Upwork UserService API",
+          "Version": "1.0",
+          "Url": "https://localhost:5199/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "jobservice",
+      "TransformByOcelotConfig": true,
+      "Config": [
+        {
+          "Name": "Upwork JobService API",
+          "Version": "1.0",
+          "Url": "https://localhost:7109/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}
