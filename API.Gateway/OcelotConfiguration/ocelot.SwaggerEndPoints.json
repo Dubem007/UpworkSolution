@@ -7,7 +7,7 @@
         {
           "Name": "Api-Gateway",
           "Version": "1.0",
-          "Url": "https://localhost:7182/swagger/v1/swagger.json"
+          "Url": "http://host.docker.internal:10065/swagger/v1/swagger.json"
         }
       ]
     },
@@ -18,29 +18,29 @@
         {
           "Name": "Identity-server",
           "Version": "1.0",
-          "Url": "https://localhost:5013"
+          "Url": "http://identityserver:80"
         }
       ]
     },
     {
-      "Key": "userservice",
+      "Key": "user-service",
       "TransformByOcelotConfig": true,
       "Config": [
         {
           "Name": "Upwork UserService API",
           "Version": "1.0",
-          "Url": "https://localhost:5199/swagger/v1/swagger.json"
+          "Url": "http://userservice:80/swagger/v1/swagger.json"
         }
       ]
     },
     {
-      "Key": "jobservice",
+      "Key": "job-service",
       "TransformByOcelotConfig": true,
       "Config": [
         {
           "Name": "Upwork JobService API",
           "Version": "1.0",
-          "Url": "https://localhost:7109/swagger/v1/swagger.json"
+          "Url": "http://jobservice:80/swagger/v1/swagger.json"
         }
       ]
     }

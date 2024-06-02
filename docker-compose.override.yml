@@ -1,74 +1,112 @@
 version: '3.4'
 
 services:
-  apigateway:
+  api-gateway:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
-      - TZ=Africa/Luanda
+      - ASPNETCORE_URLS=https://+:443;http://+:80
     ports:
-      - "5051:80"
-      - "7182:443"
+      - "10065:80"
+      - "10066:443"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - notificationservice
+      - identityserver
+      - userservice
+      - jobservice
     networks:
-      - mynetwork
+      - upworknetwork
+
+  notificationservice:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "10067:80"
+      - "10068:443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - mssql
+    networks:
+      - upworknetwork
 
   identityserver:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
     ports:
-      - "5013:80"
-      - "5001:443"
+      - "10069:80"
+      - "10070:443"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - mssql
     networks:
-      - mynetwork
+      - upworknetwork
+
+  userservice:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "10071:80"
+      - "10072:443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - redis
+      - rabbitmq-server
+      - mssql
+    networks:
+      - upworknetwork
 
   jobservice:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
-      - TZ=Africa/Luanda
+      - ASPNETCORE_URLS=https://+:443;http://+:80
     ports:
-      - "5103:80"
-      - "5104:443"
+      - "10073:80"
+      - "10074:443"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - redis
+      - rabbitmq-server
+      - mssql
     networks:
-      - mynetwork
-  
-  userservice:
+      - upworknetwork
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - upworknetwork
+
+  rabbitmq-server:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"  # RabbitMQ default port for AMQP
+      - "15672:15672"  # RabbitMQ Management UI port
+    networks:
+      - upworknetwork
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
-      - TZ=Africa/Luanda
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Dubem@007
     ports:
-      - "5101:80"
-      - "5102:443"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - "1432:1433"
     networks:
-      - mynetwork
-  
-  notificationservice:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
-      - TZ=Africa/Luanda
-    ports:
-      - "5100:80"
-      - "5110:443"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-    networks:
-      - mynetwork
+      - upworknetwork
 
 networks:
-  mynetwork:
+  upworknetwork:

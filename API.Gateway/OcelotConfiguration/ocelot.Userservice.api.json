@@ -2,12 +2,12 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/Users/{everything}",
-      "DownstreamScheme": "https",
-      "SwaggerKey": "userservice",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "user-service",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "5199"
+          "Host": "userservice",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/Identity/{everything}",
@@ -20,12 +20,12 @@
     },
     {
       "DownstreamPathTemplate": "/api/Profile/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "SwaggerKey": "userservice",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "5199"
+          "Host": "userservice",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/profile/{everything}",

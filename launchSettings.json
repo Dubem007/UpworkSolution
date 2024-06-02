@@ -4,7 +4,11 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "userservice": "StartDebugging"
+        "notificationservice": "StartDebugging",
+        "apigateway": "StartDebugging",
+        "identityserver": "StartDebugging",
+        "userservice": "StartDebugging",
+        "jobservice": "StartDebugging"
       }
     }
   }

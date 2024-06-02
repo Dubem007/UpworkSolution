@@ -1,37 +1,33 @@
 version: '3.4'
 
 services:
-    apigateway:
-        image: ${DOCKER_REGISTRY-}apigateway
-        container_name: ApiGateway
-        build:
-          context: .
-          dockerfile: API.Gateway/Dockerfile
+  notificationservice:
+    image: ${DOCKER_REGISTRY-}notificationservice
+    build:
+      context: .
+      dockerfile: NotificationService/Dockerfile
 
-    identityserver:
-        image: ${DOCKER_REGISTRY-}identityserver
-        container_name: IdentityServer
-        build:
-          context: .
-          dockerfile: IdentityServer/Dockerfile
+  api-gateway:
+    image: ${DOCKER_REGISTRY-}api-gateway
+    build:
+        context: .
+        dockerfile: API.Gateway/Dockerfile
 
-    userservice:
-        image: ${DOCKER_REGISTRY-}userservice
-        container_name: UserService
-        build:
-          context: .
-          dockerfile: UserService/Dockerfile
+  identityserver:
+    image: ${DOCKER_REGISTRY-}identityserver
+    build:
+        context: .
+        dockerfile: IdentityServer/Dockerfile
 
-    jobservice:
-        image: ${DOCKER_REGISTRY-}jobservice
-        container_name: JobService
-        build:
-          context: .
-          dockerfile: JobService/Dockerfile
+  userservice:
+    image: ${DOCKER_REGISTRY-}userservice
+    build:
+        context: .
+        dockerfile: UserService/Dockerfile
 
-    notificationservice:
-        image: ${DOCKER_REGISTRY-}notificationservice
-        container_name: NotificationService
-        build:
-          context: .
-          dockerfile: NotificationService/Dockerfile
+  jobservice:
+    image: ${DOCKER_REGISTRY-}jobservice
+    build:
+        context: .
+        dockerfile: JobService/Dockerfile
+

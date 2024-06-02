@@ -2,12 +2,12 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/Job/{everything}",
-      "DownstreamScheme": "https",
-      "SwaggerKey": "jobservice",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "job-service",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7109"
+          "Host": "jobservice",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/jobs/{everything}",
@@ -16,16 +16,20 @@
         "POST",
         "PUT",
         "DELETE"
-      ]
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/Talent/{everything}",
-      "DownstreamScheme": "https",
-      "SwaggerKey": "jobservice",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "job-service",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7109"
+          "Host": "jobservice",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/talents/{everything}",
@@ -34,7 +38,11 @@
         "POST",
         "PUT",
         "DELETE"
-      ]
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     }
   ]
 }

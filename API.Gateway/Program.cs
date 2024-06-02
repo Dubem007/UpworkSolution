@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using MMLib.SwaggerForOcelot.DependencyInjection;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Values;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,16 +21,25 @@ builder.Configuration.AddOcelotWithSwaggerSupport(options =>
 builder.Services.AddOcelot().AddDelegatingHandler<AuthenticationDelegatingHandler>();
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
 
-builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer("Bearer", options =>
-    {
-        options.Authority = "https://localhost:5013";
-        options.TokenValidationParameters = new TokenValidationParameters
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
         {
-            ValidateAudience = false
-        };
-    });
-
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = jwtSettings.GetSection("ValidIssuer").Value,
+                ValidAudience = jwtSettings.GetSection("ValidAudience").Value,
+                IssuerSigningKey = new
+                    SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtUserSecret))
+            };
+            options.Events = new JwtBearerEvents
+            {
+                OnMessageReceived = context => { return Task.CompletedTask; }
+            };
+        });
 
 var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
