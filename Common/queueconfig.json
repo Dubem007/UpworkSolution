@@ -7,7 +7,7 @@
     },
     "QueueConfig": {
       "QueueName": "http://localhost:5104/Account/",
-      "QueueConstring": "amqp://guest:guest@localhost:5672/"
+      "QueueConstring": "amqp://guest:guest@rabbitmq-server:5672/"
     }
     
   }
