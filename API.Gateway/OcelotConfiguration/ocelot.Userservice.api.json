@@ -21,7 +21,7 @@
     {
       "DownstreamPathTemplate": "/api/Profile/{everything}",
       "DownstreamScheme": "http",
-      "SwaggerKey": "userservice",
+      "SwaggerKey": "user-service",
       "DownstreamHostAndPorts": [
         {
           "Host": "userservice",
